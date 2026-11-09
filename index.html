@@ -331,7 +331,7 @@ a:hover { color: #cc0000; text-decoration: underline; }
     text-shadow: 0 1px 0 #ffffff;
 }
 
-/* RETRO FLASH POPUP BANNERS */
+/* RETRO FLASH POPUPS */
 
 .flash-popup {
     position: fixed;
@@ -380,11 +380,27 @@ a:hover { color: #cc0000; text-decoration: underline; }
     background: #ffffff;
 }
 
+/* EXACT SAME LOGO COMPONENTS AS MAIN HEADER */
+
 .flash-popup-logo {
-    font-family: "Arial Black", Gadget, sans-serif;
-    font-size: 17px;
-    letter-spacing: -1px;
-    color: #cc0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    margin: 0 auto;
+    padding: 5px 0;
+}
+
+.flash-popup-logo .logo-text-main {
+    font-size: 28px;
+}
+
+.flash-popup-logo .dot-com-box {
+    font-size: 14px;
+}
+
+.flash-popup-logo .heart-wrapper {
+    flex-shrink: 0;
 }
 
 .flash-popup-message {
@@ -653,14 +669,35 @@ function showFlashPopup() {
     close.textContent = "X";
     close.setAttribute("aria-label", "Close popup");
     close.onclick = () => popup.remove();
+
     header.appendChild(close);
 
     const content = document.createElement("div");
     content.className = "flash-popup-content";
 
+    // Reuse the exact same logo components as the main header.
     const logo = document.createElement("div");
     logo.className = "flash-popup-logo";
-    logo.innerHTML = 'lovespace<span style="color:#ffffff;background:#cc0000;padding:2px 4px;">.com</span> ♥';
+
+    const logoText = document.createElement("span");
+    logoText.className = "logo-text-main";
+    logoText.textContent = "lovespace";
+
+    const dotCom = document.createElement("span");
+    dotCom.className = "dot-com-box";
+    dotCom.textContent = ".com";
+
+    const heart = document.createElement("span");
+    heart.className = "heart-wrapper";
+
+    const avatarMask = document.createElement("span");
+    avatarMask.className = "heart-avatar-mask";
+
+    heart.appendChild(avatarMask);
+
+    logo.appendChild(logoText);
+    logo.appendChild(dotCom);
+    logo.appendChild(heart);
 
     const message = document.createElement("div");
     message.className = "flash-popup-message";
